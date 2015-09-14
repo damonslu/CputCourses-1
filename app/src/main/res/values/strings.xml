@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">CPUT Subjects App</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_add_course_form">AddCourseFormActivity</string>
+    <string name="add_subject">Add Subject</string>
+    <string name="subject_code">Code:</string>
+    <string name="input_subject_code"></string>
+    <string name="input_subject_name"></string>
+    <string name="subject_code_hint">Subject Code</string>
+    <string name="subject_name">Name:</string>
+    <string name="subject_name_hint">Subject Name</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_subject_list">SubjectListActivity</string>
+    <string name="list"></string>
+    <string name="your_subjects">Your Subjects</string>
+    <string name="subject_list_code">Code</string>
+    <string name="subject_list_name">Name</string>
+
+</resources>
