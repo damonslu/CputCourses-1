@@ -60,4 +60,14 @@
         android:hint="@string/subject_name_hint"
         />
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/save_button"
+        android:id="@+id/save_button"
+        android:layout_below="@+id/input_subject_name"
+        android:layout_alignRight="@+id/textView2"
+        android:layout_alignEnd="@+id/textView2"
+        android:layout_marginTop="86dp" />
+
 </RelativeLayout>

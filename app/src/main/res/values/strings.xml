@@ -16,5 +16,7 @@
     <string name="your_subjects">Your Subjects</string>
     <string name="subject_list_code">Code</string>
     <string name="subject_list_name">Name</string>
+    <string name="save_button">Save</string>
+
 
 </resources>

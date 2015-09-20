@@ -2,20 +2,11 @@ package za.ac.cput.cputcourses.views;
 
 import android.app.Activity;
 import android.os.AsyncTask;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
-
-import org.apache.http.NameValuePair;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.message.BasicNameValuePair;
-import org.apache.http.protocol.HTTP;
-
-import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
-import java.util.List;
 
 import za.ac.cput.cputcourses.R;
 import za.ac.cput.cputcourses.model.Subject;
@@ -23,51 +14,57 @@ import za.ac.cput.cputcourses.respositories.rest.RestSubjectAPI;
 
 public class AddSubjectFormActivity extends Activity {
     private RestSubjectAPI restSubjectAPI = new RestSubjectAPI();
-    Subject subject;
     EditText inputCode;
     EditText inputName;
+    Button saveSubject;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_course_form);
-        inputCode = (EditText) findViewById(R.id.input_subject_code);
         inputName = (EditText) findViewById(R.id.input_subject_name);
-        String name = inputName.getText().toString();
-        String code = inputCode.getText().toString();
-       // new PostSubject().execute(subject);
+        inputCode = (EditText) findViewById(R.id.input_subject_code);
+        saveSubject = (Button) findViewById(R.id.save_button);
+
+        saveSubject.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                new saveSubject().execute();
+
+            }
+        });
+
+
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_add_course_form, menu);
-        return true;
-    }
+    private class saveSubject extends AsyncTask<Void, Void, Void> {
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+        public Subject CreateSubject() {
+            Subject newSubject = new Subject();
+            String name = inputName.getText().toString();
+            String code = inputCode.getText().toString();
+            newSubject.setName(name);
+            newSubject.setCode(code);
+            return newSubject;
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
         }
 
-        return super.onOptionsItemSelected(item);
-    }
-    private class PostSubject extends AsyncTask<String, Void, String> {
+        @Override
+        protected Void doInBackground(Void ... params) {
+            Subject sub;
+            try{
+                sub = CreateSubject();
+                restSubjectAPI.post(sub);
 
-        protected String doInBackground(String ... params) {
-            String name = params[0];
-            String code = params[0];
-
+            } catch (Exception e) {
+                Log.e("log_tag", "Error:  " + e.toString());
+            }
             return null;
         }
 
 
+
     }
+
 }
