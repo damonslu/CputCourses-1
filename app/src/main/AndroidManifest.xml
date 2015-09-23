@@ -24,6 +24,10 @@
             android:name=".views.SubjectListActivity"
             android:label="@string/title_activity_subject_list" >
         </activity>
+        <activity
+            android:name=".views.ViewSubjectActivity"
+            android:label="@string/title_activity_subject_list" >
+        </activity>
     </application>
 
 </manifest>

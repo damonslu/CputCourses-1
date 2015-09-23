@@ -3,10 +3,13 @@ package za.ac.cput.cputcourses.views;
 import android.app.Activity;
 import android.app.ListActivity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -29,6 +32,18 @@ public class SubjectListActivity extends Activity{
         setContentView(R.layout.activity_subject_list);
         subjectsList = (ListView) findViewById(R.id.list);
         new GetSubjectsTask().execute();
+
+        subjectsList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Subject subject = adapter.getItem(position);
+                Intent editAndDeleteIntent = new Intent(SubjectListActivity.this, ViewSubjectActivity.class);
+                editAndDeleteIntent.putExtra("id", subject.getId());
+                editAndDeleteIntent.putExtra("name", subject.getName());
+                editAndDeleteIntent.putExtra("code", subject.getCode());
+                startActivity(editAndDeleteIntent);
+            }
+        });
     }
 
 

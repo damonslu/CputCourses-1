@@ -16,8 +16,7 @@ import za.ac.cput.cputcourses.respositories.RestAPI;
  * Created by hashcode on 2015/09/01.
  */
 public class RestSubjectAPI implements RestAPI<Subject,Long>  {
-    final String BASE_URL="http://localhost:8080/api/";
-
+    final String BASE_URL="http://10.0.0.7:8080/api/";
     final HttpHeaders requestHeaders = RestMethods.getHeaders();
     final RestTemplate restTemplate = RestMethods.getRestTemplate();
 
@@ -52,7 +51,7 @@ public class RestSubjectAPI implements RestAPI<Subject,Long>  {
     public String delete(Subject entity) {
         final String url = BASE_URL+"subject/delete/"+entity.getId().toString();
         HttpEntity<Subject> requestEntity = new HttpEntity<Subject>(entity, requestHeaders);
-        ResponseEntity<String> responseEntity = restTemplate.exchange(url, HttpMethod.PUT, requestEntity, String.class);
+        ResponseEntity<String> responseEntity = restTemplate.exchange(url, HttpMethod.DELETE, requestEntity, String.class);
         return responseEntity.getBody();
     }
 
